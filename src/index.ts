@@ -227,5 +227,152 @@ Channel ownership determines how the endpoint works:
   }
 );
 
+server.tool(
+  "recommend_architecture",
+  "Recommend a simulated architecture for an agentic commerce scenario.",
+  {
+    business_type: z.enum(["ISV", "ISO", "Marketplace", "Enterprise"]).default("ISV"),
+    geography: z.enum(["Domestic", "Cross-border", "Global"]).default("Domestic"),
+    priority: z.enum(["Control", "Speed", "Compliance simplicity", "Cost optimization"]).default("Control")
+  },
+  async ({ business_type, geography, priority }) => {
+    let channel = "ISV";
+    let gtmModel = "Platform PayFac";
+    let settlementRail = geography === "Domestic" ? "Domestic Traditional" : "Cross-border Traditional";
+    let why = "This keeps ownership close to the seller and preserves the highest level of control.";
+
+    if (business_type === "Marketplace") {
+      channel = "Marketplace/MOR";
+      gtmModel = "Marketplace";
+      settlementRail = geography === "Global" ? "Cross-border USDC" : settlementRail;
+      why = "Marketplace ownership is a natural fit when the platform wants to manage checkout, catalogue, and payout orchestration.";
+    } else if (business_type === "ISO") {
+      channel = "ISO";
+      gtmModel = geography === "Global" ? "Agentic Gateway" : "ISO Gateway";
+      why = "An ISO can expose agent-ready access over an existing merchant portfolio without re-architecting the full stack.";
+    } else if (business_type === "Enterprise") {
+      channel = "ISV";
+      gtmModel = "Embedded Finance";
+      why = "Enterprise buyers often need deeper financial services and policy control beyond simple acceptance.";
+    }
+
+    if (priority === "Speed") {
+      channel = business_type === "Marketplace" ? "Marketplace/MOR" : "ISO";
+      gtmModel = business_type === "Marketplace" ? "Marketplace" : "Agentic Gateway";
+      settlementRail = geography === "Global" ? "Cross-border USDC" : settlementRail;
+      why = "This prioritizes rapid routing, simpler onboarding, and faster payout experiences for the buyer and seller.";
+    } else if (priority === "Compliance simplicity") {
+      channel = "ISO";
+      gtmModel = "ISO Gateway";
+      settlementRail = geography === "Domestic" ? "Domestic Traditional" : "Cross-border Traditional";
+      why = "This leans on established merchant relationships and a more predictable compliance model.";
+    } else if (priority === "Cost optimization") {
+      settlementRail = geography === "Global" ? "Cross-border USDC" : "Domestic USDC";
+      why = "This reduces dependency on some traditional cross-border banking steps and can lower settlement friction for the scenario.";
+    }
+
+    return text(`
+Simulated architecture recommendation
+Business type: ${business_type}
+Geography: ${geography}
+Priority: ${priority}
+
+Recommended channel: ${channel}
+Recommended GTM model: ${gtmModel}
+Recommended settlement rail: ${settlementRail}
+
+Why: ${why}
+
+Educational note: This is a static, simulated recommendation for learning purposes only and does not connect to any real payment network.
+`);
+  }
+);
+
+server.tool(
+  "calculate_payment_cost",
+  "Estimate a simulated payment cost breakdown for a commerce scenario.",
+  {
+    volume: z.number(),
+    average_ticket: z.number(),
+    card_rate_percent: z.number(),
+    fixed_fee: z.number(),
+    fx_spread_percent: z.number().default(0)
+  },
+  async ({ volume, average_ticket, card_rate_percent, fixed_fee, fx_spread_percent }) => {
+    const cardProcessingCost = volume * (card_rate_percent / 100) + fixed_fee;
+    const fxCost = volume * (fx_spread_percent / 100);
+    const totalCost = cardProcessingCost + fxCost;
+    const effectiveCostPercent = volume > 0 ? (totalCost / volume) * 100 : 0;
+    const approximateTransactions = average_ticket > 0 ? volume / average_ticket : 0;
+
+    return text(`
+Simulated payment cost estimate
+Total volume: ${volume.toFixed(2)}
+Average ticket: ${average_ticket.toFixed(2)}
+Approximate transactions: ${approximateTransactions.toFixed(0)}
+
+Card processing cost: ${cardProcessingCost.toFixed(2)}
+FX cost: ${fxCost.toFixed(2)}
+Total cost: ${totalCost.toFixed(2)}
+Effective cost percent: ${effectiveCostPercent.toFixed(2)}%
+
+Educational note: This is a static estimate for teaching architecture tradeoffs and does not reflect real pricing from a live processor.
+`);
+  }
+);
+
+server.tool(
+  "simulate_treasury_flow",
+  "Simulate how funds move through a treasury flow for an agentic commerce scenario.",
+  {
+    channel: z.enum(["ISV", "ISO", "Marketplace/MOR"]).default("ISV"),
+    settlement: z.enum(["Traditional", "USDC"]).default("Traditional"),
+    payout_timing: z.enum(["Same day", "T+1", "T+2", "Weekly"]).default("T+1")
+  },
+  async ({ channel, settlement, payout_timing }) => {
+    let flow = "";
+
+    if (channel === "Marketplace/MOR") {
+      flow = "The buyer pays through the marketplace checkout, the platform receives the funds, and the seller is paid later through a payout step managed by the platform.";
+    } else if (channel === "ISO") {
+      flow = "The buyer pays through an agent-enabled merchant route, funds are collected by the merchant relationship owner, and the ISO or its downstream partner handles the payout to the merchant.";
+    } else {
+      flow = "The buyer pays through the ISV-enabled merchant relationship, funds are captured and routed through the ISV's merchant flow, and the seller receives a payout from the platform-led settlement layer.";
+    }
+
+    const settlementRisk = settlement === "USDC"
+      ? "Settlement risk shifts toward wallet custody, chain confirmation, and conversion or on-ramp steps if the seller needs local funds."
+      : "Settlement risk remains concentrated in bank timing, reconciliation, reserve balances, chargebacks, and delayed payout exposure.";
+
+    return text(`
+Simulated treasury flow
+Channel: ${channel}
+Settlement rail: ${settlement}
+Payout timing: ${payout_timing}
+
+How funds move:
+1. The buyer authorizes a payment through the selected channel.
+2. The payment is captured and routed through the chosen settlement rail.
+3. ${flow}
+4. The platform or seller receives funds according to the selected payout timing.
+
+Where settlement risk exists:
+- Authorization and chargeback exposure
+- Timing mismatch between capture and payout
+- Reserve or liquidity pressure if the platform holds funds temporarily
+- ${settlementRisk}
+
+Treasury controls that matter:
+- Reserve balances and payout limits
+- Daily reconciliation and exception monitoring
+- Fraud and chargeback controls
+- Approval thresholds for manual payouts
+- Clear rules for FX, conversion, and liquidity planning
+
+Educational note: This is a static simulation for architecture education and not a live payment workflow.
+`);
+  }
+);
+
 const transport = new StdioServerTransport();
 await server.connect(transport);
