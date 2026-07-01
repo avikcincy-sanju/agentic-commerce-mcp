@@ -1,13 +1,23 @@
 {
-  "compilerOptions": {
-    "target": "ES2022",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "outDir": "dist",
-    "rootDir": "src",
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true
+  "name": "agentic-commerce-mcp",
+  "version": "0.1.0",
+  "description": "Educational MCP server for agentic commerce architecture.",
+  "type": "module",
+  "bin": {
+    "agentic-commerce-mcp": "./dist/index.js"
   },
-  "include": ["src"]
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "tsx": "^4.19.2",
+    "@types/node": "^22.10.1"
+  }
 }
