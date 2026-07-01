@@ -1,0 +1,1 @@
+This directory contains the modular MCP tool registrations for the educational Agentic Commerce Architecture Expert server.
