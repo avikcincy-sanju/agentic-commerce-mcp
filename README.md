@@ -158,6 +158,4 @@ Future versions may introduce optional live integrations with payment providers 
 
 ---
 
-# License
-
-MIT License
+© 2026 Avik Nandi.This repository is provided for educational and evaluation purposes only. No commercial use, redistribution, or derivative works are permitted without prior written permission.
