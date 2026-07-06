@@ -1,12 +1,18 @@
-# Agentic Commerce Architecture Expert
+# Agentic Commerce Architecture Copilot
 
-An educational MCP server that helps product, payments, and platform teams explore agentic commerce architecture in a deterministic, self-contained way.
+An educational, deterministic MCP server for agentic commerce architecture that now includes decision trees, vendor comparison, architecture scoring, payment simulation, copilot-style reporting, and consulting-style reports while remaining fully offline.
 
 ## Architecture
 
 The codebase is organized into modular folders:
 
 - src/tools for MCP tool registrations
+- src/decision-engine for deterministic decision tree generation
+- src/vendor-engine for vendor comparison tables
+- src/scoring for weighted architecture scoring
+- src/simulator-engine for offline payment simulations
+- src/copilot for copilot-style architecture reports
+- src/reports for consulting-style reports
 - src/knowledge for reusable static knowledge objects
 - src/calculators for lightweight estimation logic
 - src/simulators for educational flow simulations
@@ -86,6 +92,62 @@ The codebase is organized into modular folders:
 - search_agentic_commerce
 - list_connectors
 
+### New decision-engine tools
+- generate_decision_tree
+- generate_checkout_decision
+- generate_psp_selection_tree
+- generate_mor_decision
+- generate_payfac_decision
+- generate_settlement_decision
+- generate_marketplace_decision
+- generate_crossborder_decision
+
+### New vendor-engine tools
+- compare_psps
+- compare_orchestrators
+- compare_treasury
+- compare_stablecoin_providers
+- compare_kyc
+- compare_fraud
+- compare_local_payment_methods
+- compare_embedded_finance
+
+### New scoring tools
+- score_architecture
+- score_vendor
+- score_psp
+- score_treasury
+- score_crossborder
+- score_marketplace
+- score_payfac
+
+### New simulator-engine tools
+- simulate_payment_network
+- simulate_checkout
+- simulate_marketplace
+- simulate_settlement
+- simulate_refunds
+- simulate_chargebacks
+- simulate_crossborder
+- simulate_stablecoin
+- simulate_fx
+- simulate_multi_psp
+- simulate_failover
+
+### New copilot tools
+- architecture_copilot
+- design_platform
+- design_marketplace
+- design_payfac
+- design_embedded_finance
+- design_crossborder
+- design_agentic_commerce
+- design_stablecoin_platform
+- design_treasury
+
+### New reporting tools
+- generate_consulting_report
+
 ## Example prompts
 
 - compare_channels with channel = ISV
@@ -130,6 +192,18 @@ The codebase is organized into modular folders:
 - generate_architecture_report with business = Marketplace, countries = US, Canada, Brazil, merchant_ownership = Platform, settlement = Traditional, treasury = Kyriba, erp = NetSuite
 - search_knowledge with query = stablecoin
 - list_connectors with provider = Stripe
+- generate_decision_tree with title = Marketplace Decision, question = Marketplace?
+- compare_psps with vendors = ["Stripe", "Adyen"]
+- score_architecture with vendor = Stripe
+- simulate_payment_network with transactionVolume = 100000, countries = 3, currencies = 2, gmv = 5000000, settlementRail = Domestic Traditional, psp = Stripe, marketplaceModel = Marketplace, merchantOwnership = Platform
+- architecture_copilot with scenario = A marketplace wants to launch in three countries with stablecoin settlement and embedded finance, domain = marketplace
+- generate_consulting_report with scenario = An ISV wants to expand globally, vendor = Stripe
+
+## Architecture diagrams
+
+- Decision trees: ASCII, Mermaid, and PlantUML output are generated directly by the decision-engine tools.
+- Copilot reports: Mermaid and PlantUML diagrams are included alongside Markdown output.
+- Placeholder screenshots: add product screenshots to docs/screenshots/ when available.
 
 ## Interactive demo
 

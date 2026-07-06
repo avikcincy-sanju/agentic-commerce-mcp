@@ -63,6 +63,12 @@ import { registerSimulateSubscription } from "../tools/simulate_subscription.js"
 import { registerSimulateTreasuryFlow } from "../tools/simulate_treasury_flow.js";
 import { registerSimulateUsdcSettlement } from "../tools/simulate_usdc_settlement.js";
 import { registerSimulateRefundFlow } from "../tools/simulate_refund_flow.js";
+import { registerDecisionTreeTools } from "../tools/decision_tree_tools.js";
+import { registerVendorComparisonTools } from "../tools/vendor_comparison_tools.js";
+import { registerScoringTools } from "../tools/scoring_tools.js";
+import { registerSimulatorTools } from "../tools/simulator_tools.js";
+import { registerCopilotTools } from "../tools/copilot_tools.js";
+import { registerReportTools } from "../tools/report_tools.js";
 
 const toolCatalogEntries: Array<Omit<ToolDefinition, "category"> & { category: ToolDefinition["category"] }> = [
   { name: "compare_channels", category: "payments", description: "Compare channel economics and suitability" },
@@ -124,7 +130,51 @@ const toolCatalogEntries: Array<Omit<ToolDefinition, "category"> & { category: T
   { name: "search_stablecoins", category: "payments", description: "Search stablecoin knowledge" },
   { name: "search_agentic_commerce", category: "agentic", description: "Search agentic commerce knowledge" },
   { name: "generate_architecture_report", category: "reporting", description: "Generate architecture report" },
-  { name: "list_connectors", category: "connectors", description: "List available enterprise connectors" }
+  { name: "list_connectors", category: "connectors", description: "List available enterprise connectors" },
+  { name: "generate_decision_tree", category: "core", description: "Generate a deterministic decision tree" },
+  { name: "generate_checkout_decision", category: "core", description: "Generate a checkout decision tree" },
+  { name: "generate_psp_selection_tree", category: "payments", description: "Generate a PSP selection decision tree" },
+  { name: "generate_mor_decision", category: "payments", description: "Generate a MOR decision tree" },
+  { name: "generate_payfac_decision", category: "payments", description: "Generate a PayFac decision tree" },
+  { name: "generate_settlement_decision", category: "payments", description: "Generate a settlement decision tree" },
+  { name: "generate_marketplace_decision", category: "marketplaces", description: "Generate a marketplace decision tree" },
+  { name: "generate_crossborder_decision", category: "payments", description: "Generate a cross-border decision tree" },
+  { name: "compare_psps", category: "payments", description: "Compare PSP providers" },
+  { name: "compare_orchestrators", category: "payments", description: "Compare orchestration providers" },
+  { name: "compare_treasury", category: "treasury", description: "Compare treasury providers" },
+  { name: "compare_stablecoin_providers", category: "payments", description: "Compare stablecoin providers" },
+  { name: "compare_kyc", category: "payments", description: "Compare KYC providers" },
+  { name: "compare_fraud", category: "payments", description: "Compare fraud tools" },
+  { name: "compare_local_payment_methods", category: "payments", description: "Compare local payment methods" },
+  { name: "compare_embedded_finance", category: "payments", description: "Compare embedded finance providers" },
+  { name: "score_architecture", category: "core", description: "Score an architecture" },
+  { name: "score_vendor", category: "core", description: "Score a vendor" },
+  { name: "score_psp", category: "payments", description: "Score a PSP" },
+  { name: "score_treasury", category: "treasury", description: "Score a treasury provider" },
+  { name: "score_crossborder", category: "payments", description: "Score a cross-border provider" },
+  { name: "score_marketplace", category: "marketplaces", description: "Score a marketplace architecture" },
+  { name: "score_payfac", category: "payments", description: "Score a PayFac architecture" },
+  { name: "simulate_payment_network", category: "payments", description: "Simulate an end-to-end payment network" },
+  { name: "simulate_checkout", category: "payments", description: "Simulate a checkout flow" },
+  { name: "simulate_marketplace", category: "marketplaces", description: "Simulate a marketplace flow" },
+  { name: "simulate_settlement", category: "payments", description: "Simulate a settlement flow" },
+  { name: "simulate_refunds_flow", category: "payments", description: "Simulate a refund flow" },
+  { name: "simulate_chargebacks", category: "payments", description: "Simulate a chargeback flow" },
+  { name: "simulate_crossborder_flow", category: "payments", description: "Simulate a cross-border flow" },
+  { name: "simulate_stablecoin", category: "payments", description: "Simulate a stablecoin flow" },
+  { name: "simulate_fx", category: "payments", description: "Simulate an FX flow" },
+  { name: "simulate_multi_psp", category: "payments", description: "Simulate a multi-PSP flow" },
+  { name: "simulate_failover", category: "payments", description: "Simulate a failover flow" },
+  { name: "architecture_copilot", category: "agentic", description: "Produce an architecture copilot report" },
+  { name: "design_platform_copilot", category: "core", description: "Design a platform architecture" },
+  { name: "design_marketplace_copilot", category: "marketplaces", description: "Design a marketplace architecture" },
+  { name: "design_payfac_copilot", category: "payments", description: "Design a PayFac architecture" },
+  { name: "design_embedded_finance_copilot", category: "payments", description: "Design an embedded finance architecture" },
+  { name: "design_crossborder_copilot", category: "payments", description: "Design a cross-border architecture" },
+  { name: "design_agentic_commerce_copilot", category: "agentic", description: "Design an agentic commerce architecture" },
+  { name: "design_stablecoin_platform_copilot", category: "payments", description: "Design a stablecoin platform architecture" },
+  { name: "design_treasury_copilot", category: "treasury", description: "Design a treasury architecture" },
+  { name: "generate_consulting_report", category: "reporting", description: "Generate a consulting report" }
 ];
 
 export const toolCatalog: ToolDefinition[] = toolCatalogEntries.map((entry) => ToolDefinitionSchema.parse(entry));
@@ -194,4 +244,10 @@ export function registerAllTools(server: McpServer): void {
   registerSearchAgenticCommerce(server);
   registerGenerateArchitectureReport(server);
   registerListConnectors(server);
+  registerDecisionTreeTools(server);
+  registerVendorComparisonTools(server);
+  registerScoringTools(server);
+  registerSimulatorTools(server);
+  registerCopilotTools(server);
+  registerReportTools(server);
 }
