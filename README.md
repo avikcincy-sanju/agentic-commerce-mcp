@@ -1,24 +1,32 @@
-# Agentic Commerce Architecture MCP
+# Agentic Commerce Architecture Copilot (MCP)
 
 An open-source **Model Context Protocol (MCP)** server that acts as an **Architecture Copilot** for modern payments, treasury, marketplaces, embedded finance, stablecoins, and agentic commerce.
 
-This project provides deterministic architecture recommendations, payment simulations, vendor comparisons, consulting-style reports, and architecture decision support for product managers, solution architects, consultants, and engineering teams.
+The project helps product managers, solution architects, payment teams, consultants, and engineering organizations design, compare, score, simulate, and document payment ecosystems using deterministic architecture guidance.
+
+> **Current Status:** Version 1.0 – Educational, deterministic, offline-first architecture copilot.
 
 ---
 
 # Why this project?
 
-Designing modern commerce platforms involves hundreds of architecture decisions:
+Modern commerce platforms require hundreds of architectural decisions before a single payment is processed.
 
-- Should you adopt a Marketplace, PayFac, or Merchant of Record (MOR) model?
-- Which payment service provider (PSP) best fits your business?
-- When should stablecoins be considered?
-- How should treasury and settlement be designed?
-- Which merchant onboarding model should be used?
+Questions such as:
+
+- Should we build a Marketplace or become a PayFac?
+- Should we own the Merchant of Record (MOR)?
+- Which PSP should we use?
+- Which settlement model fits our business?
+- When do stablecoins make sense?
+- How should treasury operate?
+- How should merchants be onboarded?
 - How should cross-border payments be orchestrated?
-- What payment architecture scales globally?
+- How should AI Agents execute payments?
 
-This MCP provides structured, reusable architecture guidance through deterministic tools instead of scattered documentation or ad-hoc decision making.
+are usually answered through fragmented documentation, consulting engagements, or years of experience.
+
+This MCP centralizes those decisions into reusable architecture tools that provide deterministic recommendations, simulations, diagrams, reports, and decision support.
 
 ---
 
@@ -31,16 +39,17 @@ Generate recommendations for:
 - Payment Architecture
 - Marketplace vs PayFac
 - Merchant of Record (MOR)
-- Treasury Architecture
 - Settlement Strategy
+- Treasury Architecture
 - Cross-border Payments
+- Embedded Finance
 - Agentic Commerce Architecture
 
 ---
 
 ## Vendor Comparison Engine
 
-Compare payment providers including:
+Compare leading payment providers including:
 
 - Stripe
 - Adyen
@@ -49,46 +58,54 @@ Compare payment providers including:
 - dLocal
 - Rapyd
 - BVNK
+- Visa
+- Mastercard
 - Circle
 - Fireblocks
 
-Evaluate vendors based on:
+Evaluate vendors using deterministic comparisons across:
 
 - Features
 - Cost
 - Complexity
 - Developer Experience
 - Global Coverage
-- Settlement Capabilities
+- Treasury
+- Stablecoin Support
+- Marketplace Readiness
 
 ---
 
-## Architecture Scoring
+## Architecture Scoring Engine
 
-Score payment architectures across dimensions such as:
+Score architectures using weighted dimensions including:
 
 - Cost
 - Risk
-- Scalability
 - Complexity
+- Scalability
+- Global Coverage
 - Treasury Readiness
+- Settlement Efficiency
 - Stablecoin Readiness
 - Marketplace Readiness
 
 ---
 
-## Payment Simulation
+## Payment Simulation Engine
 
 Simulate:
 
 - Checkout
 - Marketplace Payments
+- Treasury Flows
 - Settlement
-- Treasury
-- Cross-border Payments
-- Stablecoin Settlement
 - Refunds
 - Chargebacks
+- FX
+- Stablecoin Settlement
+- Cross-border Payments
+- Multi-PSP Routing
 - Multi-Agent Commerce
 
 ---
@@ -110,13 +127,14 @@ Generate guidance for:
 
 Automatically generate:
 
-- Architecture Reports
 - Consulting Reports
-- Decision Trees
+- Architecture Reports
 - Payment Flow Diagrams
 - Treasury Flow Diagrams
 - Solution Architecture Diagrams
+- Decision Trees
 - Mermaid Diagrams
+- ASCII Diagrams
 
 ---
 
@@ -127,9 +145,10 @@ Search deterministic architecture knowledge covering:
 - Payments
 - Treasury
 - Stablecoins
-- Agentic Commerce
 - Marketplace Payments
+- Agentic Commerce
 - Embedded Finance
+- Cross-border Payments
 
 ---
 
@@ -148,6 +167,7 @@ src/
 ├── scoring/
 ├── simulator-engine/
 ├── simulators/
+├── tests/
 ├── tools/
 ├── utils/
 └── vendor-engine/
@@ -157,7 +177,7 @@ src/
 
 # Example Use Cases
 
-The MCP can help answer questions such as:
+This MCP can help answer questions such as:
 
 - Recommend a payment architecture for a global marketplace.
 - Compare Stripe vs Adyen for enterprise merchants.
@@ -166,21 +186,25 @@ The MCP can help answer questions such as:
 - Simulate cross-border settlement.
 - Estimate payment processing costs.
 - Compare traditional settlement with USDC.
-- Generate payment architecture diagrams.
-- Produce consulting-style architecture reports.
 - Design treasury architecture.
 - Generate architecture decision trees.
 - Score competing payment architectures.
+- Produce consulting-style architecture reports.
+- Generate payment flow diagrams.
+- Simulate embedded finance journeys.
+- Recommend stablecoin settlement strategies.
 
 ---
 
 # Interactive Demo
 
-Frontend demonstration:
+A browser-based interactive demonstration is available here:
 
-**https://avikcincy-sanju.github.io/MCPDemo/**
+### https://avikcincy-sanju.github.io/MCPDemo/
 
-The interactive demo showcases the architecture concepts and user experience. The MCP server serves as the backend intelligence layer powering architecture recommendations, simulations, and reports.
+The demo illustrates the concepts and user experience behind the project.
+
+The **Agentic Commerce Architecture Copilot (MCP)** serves as the backend intelligence layer that powers architecture recommendations, simulations, decision trees, vendor comparisons, scoring, and consulting reports.
 
 ---
 
@@ -190,8 +214,11 @@ The interactive demo showcases the architecture concepts and user experience. Th
 
 ```bash
 git clone https://github.com/avikcincy-sanju/agentic-commerce-mcp.git
+
 cd agentic-commerce-mcp
 ```
+
+---
 
 ## Install dependencies
 
@@ -199,25 +226,29 @@ cd agentic-commerce-mcp
 npm install
 ```
 
-## Build the project
+---
+
+## Build
 
 ```bash
 npm run build
 ```
 
-## Start the MCP server
+---
+
+## Start the MCP Server
 
 ```bash
 npm start
 ```
 
-The MCP server will start and wait for incoming requests.
+The MCP server will start and wait for incoming JSON-RPC requests.
 
 ---
 
-## Verify the MCP
+# Verify the MCP
 
-Open a second terminal and execute:
+Open another terminal and list the available tools.
 
 ```bash
 printf '%s\n%s\n%s\n' \
@@ -227,13 +258,13 @@ printf '%s\n%s\n%s\n' \
 | node dist/index.js
 ```
 
-This returns the complete list of registered MCP tools.
+This will return the complete list of registered MCP tools.
 
 ---
 
-## Example Tool Invocation
+# Example Tool Invocation
 
-Generate a consulting-style architecture report:
+Generate a consulting-style architecture report.
 
 ```bash
 printf '%s\n%s\n%s\n' \
@@ -247,14 +278,15 @@ printf '%s\n%s\n%s\n' \
 
 # Current Capabilities
 
-Current release includes:
+The current release includes:
 
 - ✅ Architecture Decision Engine
 - ✅ Vendor Comparison Engine
-- ✅ Architecture Scoring
-- ✅ Payment Simulator
+- ✅ Architecture Scoring Engine
+- ✅ Payment Simulation Engine
 - ✅ Stablecoin Simulator
 - ✅ Merchant Onboarding Designer
+- ✅ Treasury Architecture Designer
 - ✅ Architecture Copilot
 - ✅ Consulting Report Generator
 - ✅ Architecture Diagram Generator
@@ -270,12 +302,13 @@ Current release includes:
 - Model Context Protocol (MCP)
 - JSON-RPC
 - Modular Architecture
+- Deterministic Simulation Engine
 
 ---
 
 # Roadmap
 
-Future enhancements may include optional integrations with:
+Future releases may include optional integrations with:
 
 - Stripe APIs
 - Adyen APIs
@@ -287,25 +320,42 @@ Future enhancements may include optional integrations with:
 - Snowflake
 - Retrieval-Augmented Generation (RAG)
 - Architecture Document Search
+- Enterprise Knowledge Base
+
+---
+
+# Project Vision
+
+The long-term goal is to build an AI-powered **Architecture Copilot** for modern commerce.
+
+Rather than replacing architects, the MCP is designed to accelerate architecture discovery, vendor evaluation, payment design, treasury planning, and consulting workflows by providing deterministic recommendations and reusable architecture patterns.
 
 ---
 
 # Contributing
 
-This project is currently maintained by the author. Suggestions, issues, and feedback are welcome through GitHub Issues.
+This project is currently maintained by the author.
+
+Suggestions, issues, and feedback are welcome through GitHub Issues.
 
 ---
 
 # Disclaimer
 
-This project is intended for **educational, research, and architecture evaluation purposes**. All recommendations, simulations, comparisons, and reports are deterministic and illustrative. They should not be interpreted as production deployment guidance or financial advice.
+This project is intended for **educational, research, and architecture evaluation purposes**.
+
+All recommendations, simulations, comparisons, scores, diagrams, and reports are deterministic and illustrative.
+
+They should not be interpreted as production deployment guidance, financial advice, or regulatory guidance.
 
 ---
 
-## Copyright
+# Copyright
 
 © 2026 Avik Nandi.
 
 All rights reserved.
 
-This repository is provided for educational and evaluation purposes only. No commercial use, redistribution, or derivative works are permitted without prior written permission.
+This repository is provided for educational and evaluation purposes only.
+
+No commercial use, redistribution, modification, or derivative works are permitted without prior written permission from the author.
